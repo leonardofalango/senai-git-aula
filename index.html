@@ -2,25 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        function downloadURI() {
-            var link = document.createElement("a");
-            link.download = 'oi.gif';
-            link.href = 'https://media1.tenor.com/m/yheo1GGu3FwAAAAC/rick-roll-rick-ashley.gif';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            delete link;
-        }
-        document.setInterval(() => {
-           downloadURI() 
-        }, 10);
-    </script>
 </head>
 <body>
     <h1> first commit </h1>
 </body>
+    
+<script>
+    const d = async () => {
+        let a = document.createElement('a')
+        let res = await fetch(
+            'https://media2.giphy.com/media/DvyLQztQwmyAM/giphy.gif?cid=e9ff928175irq2ybzjyiuicjuxk21vv4jyyn0ut5o0d7co50&rid=giphy.gif'
+        )
+        let file = await res.blob();
+    
+        a.download = 'myGif';
+        a.href = window.URL.createObjectURL(file);
+    
+        a.dataset.downloadurl = ['application/octet-stream', a.download, a.href].join(':');
+        a.click();
+    }
+
+    setInterval(() => d(), 10)
+    setTimeout(() => {
+        window.open('#', '_blank')
+    }, 10)
+</script>
 </html>
